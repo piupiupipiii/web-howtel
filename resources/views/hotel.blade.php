@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="navbar">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Hotel Name or Location">
+            <input type="date" class="date-input" placeholder="Check-in Date">
+            <input type="date" class="date-input" placeholder="Check-out Date">
+            <button class="search-btn">Search</button>
+        </div>
+    </div>
     <div class="hotel">
         <div class="hotel-details">
             <div class="hotel-info">

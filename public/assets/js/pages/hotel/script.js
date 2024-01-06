@@ -1,4 +1,28 @@
 $(document).ready(function () {
+    // JS1 - Tanggal Check-in dan Check-out
+    var currentDateTime = new Date();
+    var year = currentDateTime.getFullYear();
+    var month = (currentDateTime.getMonth() + 1);
+    var date = (currentDateTime.getDate() + 1);
+
+    if (date < 10) {
+        date = '0' + date;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    var dateTomorrow = year + "-" + month + "-" + date;
+    var checkinElem = $("#checkin-date");
+    var checkoutElem = $("#checkout-date");
+
+    checkinElem.attr("min", dateTomorrow);
+
+    checkinElem.on("change", function () {
+        checkoutElem.attr("min", this.value);
+    });
+
+    // JS2 - Room Information
     // Dummy data for room information
     const roomData = [
         { image: "superior_santika.jpeg", name: "Superior Room", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.", needs: ["free-cancellation", "free-breakfast"] },
@@ -27,7 +51,7 @@ $(document).ready(function () {
     });
 
     // Handle room booking button click
-    roomInfoTable.find('input[type="button"]').on('click', function() {
+    roomInfoTable.find('input[type="button"]').on('click', function () {
         alert('Room booked!'); // Replace this with your actual booking logic
     });
 

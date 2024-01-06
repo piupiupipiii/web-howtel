@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/hotel/{id}', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
+
+
+Route::post('/booking', [BookingController::class, 'submit']);
+
