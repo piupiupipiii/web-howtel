@@ -9,8 +9,8 @@ class HotelController extends Controller
 {
     public function index(int $id, Request $request)
     {
-        $hotel = Hotel::with(['images', 'facilities', 'rooms'])->find($id);
+        $hotel = Hotel::with(['images', 'facilities', 'rooms', 'rooms.images'])->find($id);
 
-        return view('hotel', ['hotel' => $hotel]);
+        return view('pages.hotel', ['hotel' => $hotel]);
     }
 }
