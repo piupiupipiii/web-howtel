@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
@@ -35,6 +36,10 @@ Route::group(['middleware' => 'guest'], function (Router $route) {
 });
 
 Route::group(['middleware' => 'auth'], function (Router $route) {
+    $route->group(['prefix' => '/logout', 'as' => 'logout.'], function (Router $route) {
+        $route->get('/', [LogoutController::class, 'destroy'])->name('destroy');
+    });
+
     $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
         $route->post('/', [BookingController::class, 'store'])->name('store');
         $route->get('/create', [BookingController::class, 'create'])->name('create');
