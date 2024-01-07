@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->date('check_out');
             $table->text('message');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
