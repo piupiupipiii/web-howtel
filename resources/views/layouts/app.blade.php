@@ -14,7 +14,18 @@
     <title>Hotel Booking</title>
 </head>
 <body>
-@yield('content')
-@stack('script')
+    @if(!request()->is('booking*') && !request()->is('profile'))
+        <div class="navbar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Hotel Name or Location">
+                <input type="date" class="date-input" placeholder="Check-in Date">
+                <input type="date" class="date-input" placeholder="Check-out Date">
+                <button class="search-btn">Search</button>
+            </div>
+        </div>
+    @endif
+
+    @yield('content')
+    @stack('script')
 </body>
 </html>

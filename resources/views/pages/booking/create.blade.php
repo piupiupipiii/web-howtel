@@ -29,7 +29,7 @@
         </div>
         <div class="elem-group">
             <label for="phone">Nomor Telepon</label>
-            <input type="tel" id="phone" name="visitor_phone" pattern="(\d{3})-?\s?(\d{3})-?\s?(\d{4})" required value="{{ auth()->user()->phone }}">
+            <input type="tel" id="phone" name="visitor_phone" pattern="[0-9]{10,14}" required value="{{ auth()->user()->phone }}">
         </div>
         <div class="elem-group inlined">
             <label for="adult">Orang Dewasa</label>

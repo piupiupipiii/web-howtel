@@ -18,30 +18,35 @@
             @endif
 
             <div class="facilities">
-                <table>
+            <h3>Fasilitas</h3>
+                <table class="facility-table">
                     <tr>
                         <td>
-                            <h3>Fasilitas</h3>
-                            @foreach($hotel->facilities as $facility)
-                                <div class="{{ str($facility->name)->slug() }}-container">
-                                    @if(str($facility->icon)->startsWith('bi'))
-                                        <i class="{{ $facility->icon }}"></i>
-                                    @else
-                                        <img
-                                            src="{{ asset($facility->icon) }}"
-                                            alt="icon"
-                                            style="width: 20px; height: 20px;"
-                                        >
-                                    @endif
-                                    <span>{{ $facility->name }}</span>
-                                </div>
-                            @endforeach
+                            
+                            <div class="facility-container">
+                                @foreach($hotel->facilities as $facility)
+                                    <div class="facility-item">
+                                        <div class="facility-icon">
+                                            @if(str($facility->icon)->startsWith('bi'))
+                                                <i class="{{ $facility->icon }}"></i>
+                                            @else
+                                                <img src="{{ asset($facility->icon) }}" alt="icon" style="width: 20px; height: 20px;">
+                                            @endif
+                                        </div>
+                                        <div class="facility-text">
+                                            <span>{{ $facility->name }}</span>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </td>
                     </tr>
                 </table>
             </div>
 
-            <a href="{{ route('hotel', ['id' => $hotel->id]) }}">Detail</a>
+
+            <a href="{{ route('hotel', ['id' => $hotel->id]) }}" class="button-detail">Detail</a>
+
         </div>
     @endforeach
 @endsection

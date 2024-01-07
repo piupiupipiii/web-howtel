@@ -1,9 +1,11 @@
+// scripts.js
+
 $(document).ready(function () {
     // JS1 - Tanggal Check-in dan Check-out
     var currentDateTime = new Date();
     var year = currentDateTime.getFullYear();
     var month = (currentDateTime.getMonth() + 1);
-    var date = (currentDateTime.getDate() + 1);
+    var date = currentDateTime.getDate() + 1;
 
     if (date < 10) {
         date = '0' + date;
@@ -56,30 +58,26 @@ $(document).ready(function () {
         alert(`Room "${roomName}" booked!`); // Replace this with your actual booking logic
     });
 
-    // Fungsi untuk menyaring kamar berdasarkan kriteria "Search by Need"
-    function filterRooms() {
-        // Ambil semua checkbox yang dicentang
-        var selectedNeeds = $('input[data-need]:checked').map(function () {
-            return $(this).data('need');
-        }).get();
-
-        // Sembunyikan semua kamar
-        roomInfoTable.find('tr').hide();
-
-        // Tampilkan hanya kamar yang memenuhi kriteria
-        if (selectedNeeds.length > 0) {
-            selectedNeeds.forEach(function (need) {
-                roomInfoTable.find(`tr[data-needs*="${need}"]`).show();
-            });
-        } else {
-            // Jika tidak ada kriteria yang dipilih, tampilkan semua kamar
-            roomInfoTable.find('tr').show();
-        }
-    }
-
     // Event handler untuk setiap perubahan pada checkbox
     $('.search-by-need-btn').on('click', filterRooms);
 
     // Inisialisasi pemfilteran kamar
     filterRooms();
+
+    // JS3 - Pencarian Hotel berdasarkan Nama atau Lokasi
+    var searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', performSearch);
+
+    function performSearch() {
+        var searchQuery = searchInput.value.toLowerCase();
+        var hotels = document.querySelectorAll('.hotel-info h2');
+
+        hotels.forEach(function (hotel) {
+            var hotelName = hotel.textContent.toLowerCase();
+            var parentHotel = hotel.closest('.hotel');
+            var isVisible = hotelName.includes(searchQuery);
+
+            parentHotel.style.display = isVisible ? 'block' : 'none';
+        });
+    }
 });

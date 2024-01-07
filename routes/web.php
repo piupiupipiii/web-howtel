@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/search-hotels', [HotelController::class, 'searchHotels'])->name('search.hotels');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/hotel/{id}', [HotelController::class, 'index'])->name('hotel');
 
