@@ -43,5 +43,6 @@ Route::group(['middleware' => 'auth'], function (Router $route) {
     $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
         $route->post('/', [BookingController::class, 'store'])->name('store');
         $route->get('/create', [BookingController::class, 'create'])->name('create');
+        $route->get('/detail/{id}', [BookingController::class, 'detail'])->name('detail');
     });
 });
