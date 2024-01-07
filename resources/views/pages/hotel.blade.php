@@ -76,7 +76,6 @@
                             </td>
                             <td>
                                 <form action="{{ route('booking.create') }}">
-                                    <input type="hidden" name="hotel" value="{{ $hotel->id }}">
                                     <input type="hidden" name="room" value="{{ $room->id }}">
                                     <button type="submit" class="input-button">Pesan Kamar</button>
                                 </form>
