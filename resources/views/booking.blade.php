@@ -10,6 +10,15 @@
 </head>
 <body>
 
+<form action="{{ route('storeBooking', ['hotel_id' => $hotel->id]) }}" method="post">
+    @csrf <!-- Tambahkan ini untuk perlindungan CSRF -->
+    
+    <!-- Informasi Hotel -->
+    <div class="hotel-info">
+        <h2>{{ $hotel->name }}</h2>
+        <p>Hotel Bintang {{ $hotel->stars }}</p>
+        <p>{{ $hotel->address }}</p>
+    </div>
 <form action="{{ url('/booking') }}" method="post">
     @csrf <!-- Tambahkan ini untuk perlindungan CSRF -->
     <div class="elem-group">

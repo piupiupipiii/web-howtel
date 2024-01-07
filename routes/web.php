@@ -17,6 +17,12 @@ use App\Http\Controllers\BookingController;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/hotel/{id}', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
 
+Route::get('/booking/{hotel_id}', 'BookingController@show')->name('booking');
+Route::get('/hotels', 'HotelController@showHotels')->name('showHotels');
+Route::post('/booking', 'HotelController@bookingAction')->name('booking');
 
-Route::post('/booking', [BookingController::class, 'submit']);
+
+
+
+
 
