@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.profile', ['user' => auth()->user()->with(['orders', 'orders.room.hotel'])->first() ]);
+        $user = User::with(['orders', 'orders.room.hotel'])->find(auth()->user()->id);
+
+        return view('pages.profile', ['user' => $user]);
     }
 }
