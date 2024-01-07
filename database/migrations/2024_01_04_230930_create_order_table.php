@@ -14,12 +14,17 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('room_id')->constrained('rooms');
+            $table->boolean('for_themself')->default(true);
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->unsignedInteger('total_adults');
             $table->unsignedInteger('total_children');
             $table->date('check_in');
             $table->date('check_out');
-            $table->text('request');
+            $table->text('message');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

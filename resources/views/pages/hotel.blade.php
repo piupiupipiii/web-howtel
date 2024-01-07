@@ -74,12 +74,15 @@
                                 <h5>{{ $room->name }}</h5>
                                 <p>{{ $room->description }}</p>
                             </td>
-                            <td>
-                                <form action="{{ route('booking.create') }}">
-                                    <input type="hidden" name="room" value="{{ $room->id }}">
-                                    <button type="submit" class="input-button">Pesan Kamar</button>
-                                </form>
-                            </td>
+
+                            @auth
+                                <td>
+                                    <form action="{{ route('booking.create') }}">
+                                        <input type="hidden" name="room" value="{{ $room->id }}">
+                                        <button type="submit" class="input-button">Pesan Kamar</button>
+                                    </form>
+                                </td>
+                            @endauth
                         </tr>
                     @endforeach
                 </table>

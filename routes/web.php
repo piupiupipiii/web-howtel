@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
@@ -40,8 +41,14 @@ Route::group(['middleware' => 'auth'], function (Router $route) {
         $route->get('/', [LogoutController::class, 'destroy'])->name('destroy');
     });
 
+    $route->group(['prefix' => '/profile', 'as' => 'profile.'], function (Router $route) {
+        $route->get('/', [ProfileController::class, 'index'])->name('index');
+    });
+
     $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
         $route->post('/', [BookingController::class, 'store'])->name('store');
         $route->get('/create', [BookingController::class, 'create'])->name('create');
+        $route->get('/detail/{id}', [BookingController::class, 'detail'])->name('detail');
+        $route->patch('/cancel', [BookingController::class, 'cancel'])->name('cancel');
     });
 });

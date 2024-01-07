@@ -10,9 +10,12 @@
                     <p>{{ $hotel->address }}</p>
                 </div>
             </div>
-            <div class="hotel-imager">
-                <img src="{{ $hotel->images->first()->path }}" alt="{{ $hotel->images->first()->alt }}">
-            </div>
+
+            @if($image = $hotel->images->first())
+                <div class="hotel-imager">
+                    <img src="{{ $image->path }}" alt="{{ $image->alt }}">
+                </div>
+            @endif
 
             <div class="facilities">
                 <table>
