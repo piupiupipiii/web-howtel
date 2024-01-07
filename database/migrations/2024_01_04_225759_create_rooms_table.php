@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hotel_id')->constrained('hotels');
+            $table->foreignId('hotel_id')->constrained('hotels')->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
             $table->unsignedInteger('price');
