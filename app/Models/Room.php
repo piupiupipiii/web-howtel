@@ -19,4 +19,9 @@ class Room extends Model
     {
         return $this->hasMany(RoomImage::class, 'room_id', 'id');
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'room_id', 'id');
+    }
 }

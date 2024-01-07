@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Hotel extends Model
 {
@@ -22,5 +23,10 @@ class Hotel extends Model
     public function rooms(): HasMany
     {
         return $this->hasMany(Room::class, 'hotel_id', 'id');
+    }
+
+    public function orders(): HasManyThrough
+    {
+        return $this->hasManyThrough(Order::class, Room::class);
     }
 }
