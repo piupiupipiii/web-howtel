@@ -1,18 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(session('login_invalid'))
-        <p>Login gagal</p>
-    @endif
-
-    <form action="{{ route('login.authenticate') }}" method="post">
+    <form action="{{ route('register.store') }}" method="post">
         @csrf
+        <label>
+            <input type="text" name="name" required>
+        </label>
         <label>
             <input type="text" name="email" required>
         </label>
         <label>
             <input type="password" name="password" required>
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
 @endsection
