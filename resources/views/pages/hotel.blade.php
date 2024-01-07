@@ -56,38 +56,40 @@
                         <label><input type="checkbox" data-need="free-breakfast"> Free Breakfast</label>
                         <label><input type="checkbox" data-need="extra-bed"> Extra Bed</label>
                         <label><input type="checkbox" data-need="large-bed"> Large Bed</label>
+                        <button class="search-by-need-btn">Search</button>
                     </td>
                 </tr>
-                <table class="room-info-table">
-                    @foreach($hotel->rooms as $room)
-                        <tr>
-                            <td>
-                                @foreach($room->images as $image)
-                                    <img
-                                        src="{{ asset($image->path) }}"
-                                        alt="{{ $image->alt }}"
-                                        style="max-width: 300px;"
-                                    >
-                                @endforeach
-                            </td>
-                            <td>
-                                <h5>{{ $room->name }}</h5>
-                                <p>{{ $room->description }}</p>
-                            </td>
-
-                            @auth
-                                <td>
-                                    <form action="{{ route('booking.create') }}">
-                                        <input type="hidden" name="room" value="{{ $room->id }}">
-                                        <button type="submit" class="input-button">Pesan Kamar</button>
-                                    </form>
-                                </td>
-                            @endauth
-                        </tr>
-                    @endforeach
-                </table>
             </table>
         </div>
+
+        <table class="room-info-table">
+            @foreach($hotel->rooms as $room)
+                <tr class="room" data-needs="{{ implode(',', $room->getNeeds()) }}">
+                    <td>
+                        @foreach($room->images as $image)
+                            <img
+                                src="{{ asset($image->path) }}"
+                                alt="{{ $image->alt }}"
+                                style="max-width: 300px;"
+                            >
+                        @endforeach
+                    </td>
+                    <td>
+                        <h5>{{ $room->name }}</h5>
+                        <p class="room-description">{{ $room->description }}</p>
+                    </td>
+
+                    @auth
+                        <td>
+                            <form action="{{ route('booking.create') }}">
+                                <input type="hidden" name="room" value="{{ $room->id }}">
+                                <button type="submit" class="input-button">Pesan Kamar</button>
+                            </form>
+                        </td>
+                    @endauth
+                </tr>
+            @endforeach
+        </table>
     </div>
 @endsection
 
