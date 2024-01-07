@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
@@ -20,7 +21,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/hotel/{id}', [HotelController::class, 'index'])->name('hotel');
 
-Route::group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
-    $route->post('/', [BookingController::class, 'store'])->name('store');
-    $route->get('/create', [BookingController::class, 'create'])->name('create');
+Route::group(['middleware' => 'guest'], function (Router $route) {
+    $route->group(['prefix' => '/login', 'as' => 'login.'], function (Router $route) {
+        $route->get('/', [LoginController::class, 'index'])->name('index');
+        $route->post('/', [LoginController::class, 'authenticate'])->name('authenticate');
+    });
+});
+
+Route::group(['middleware' => 'auth'], function (Router $route) {
+    $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
+        $route->post('/', [BookingController::class, 'store'])->name('store');
+        $route->get('/create', [BookingController::class, 'create'])->name('create');
+    });
 });
