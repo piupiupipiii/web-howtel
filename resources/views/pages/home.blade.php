@@ -24,7 +24,11 @@
                                     @if(str($facility->icon)->startsWith('bi'))
                                         <i class="{{ $facility->icon }}"></i>
                                     @else
-                                        <img src="{{ asset($facility->icon) }}" alt="icon" style="width: 20px; height: 20px;">
+                                        <img
+                                            src="{{ asset($facility->icon) }}"
+                                            alt="icon"
+                                            style="width: 20px; height: 20px;"
+                                        >
                                     @endif
                                     <span>{{ $facility->name }}</span>
                                 </div>

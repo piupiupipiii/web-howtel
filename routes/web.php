@@ -1,7 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HotelController;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +20,28 @@ use App\Http\Controllers\BookingController;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/hotel/{id}', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/hotel/{id}', [HotelController::class, 'index'])->name('hotel');
 
-Route::get('/booking/{hotel_id}', 'BookingController@show')->name('booking');
-Route::get('/hotels', 'HotelController@showHotels')->name('showHotels');
-Route::post('/booking', 'HotelController@bookingAction')->name('booking');
+Route::group(['middleware' => 'guest'], function (Router $route) {
+    $route->group(['prefix' => '/login', 'as' => 'login.'], function (Router $route) {
+        $route->get('/', [LoginController::class, 'index'])->name('index');
+        $route->post('/', [LoginController::class, 'authenticate'])->name('authenticate');
+    });
 
+    $route->group(['prefix' => '/register', 'as' => 'register.'], function (Router $route) {
+        $route->get('/', [RegisterController::class, 'create'])->name('create');
+        $route->post('/', [RegisterController::class, 'store'])->name('store');
+    });
+});
 
+Route::group(['middleware' => 'auth'], function (Router $route) {
+    $route->group(['prefix' => '/logout', 'as' => 'logout.'], function (Router $route) {
+        $route->get('/', [LogoutController::class, 'destroy'])->name('destroy');
+    });
 
-
-
-
+    $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
+        $route->post('/', [BookingController::class, 'store'])->name('store');
+        $route->get('/create', [BookingController::class, 'create'])->name('create');
+    });
+});
