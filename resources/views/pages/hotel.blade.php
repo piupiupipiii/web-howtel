@@ -64,7 +64,7 @@
 
         <table class="room-info-table">
             @foreach($hotel->rooms as $room)
-                <tr class="room" data-needs="{{ implode(',', $room->getNeeds()) }}">
+                <tr class="room">
                     <td>
                         @foreach($room->images as $image)
                             <img
