@@ -66,4 +66,15 @@ class BookingController extends Controller
 
         return view('pages.booking.detail', ['order' => $order, 'qr' => $qr]);
     }
+
+    public function cancel(Request $request)
+    {
+        if (! $order = Order::where(['id' => $request->id, 'user_id' => auth()->user()->id])->first()) {
+            abort(404);
+        }
+
+        $order->delete();
+
+        return redirect()->route('profile.index');
+    }
 }

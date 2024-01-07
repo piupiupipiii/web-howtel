@@ -19,4 +19,13 @@
             <img src="{!! $qr !!}" alt="QR">
         </div>
     </div>
+
+    @if(str($order->check_in)->toDate() > now()->addDays(3))
+        <form action="{{ route('booking.cancel') }}" method="post">
+            @csrf
+            @method('PATCH')
+            <input type="hidden" name="id" value="{{ $order->id }}">
+            <button type="submit">Batalkan</button>
+        </form>
+    @endif
 @endsection
