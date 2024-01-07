@@ -12,7 +12,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.hotel-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .hotel-details {
@@ -20,6 +27,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .hotel-info {
@@ -35,12 +43,68 @@ body {
     margin: 5px 0;
 }
 
-.hotel-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-top: 10px;
+.hotel-image {
+    width: 100%;
+    margin-bottom: 10px;
 }
+
+.hotel-image img {
+    width: 300px; /* Sesuaikan lebar yang diinginkan */
+    height: 200px; /* Sesuaikan tinggi yang diinginkan */
+    object-fit: cover; /* Untuk menjaga perbandingan aspek dan mengisi kotak dengan gambar */
+    border-radius: 8px;
+}
+
+
+.facilities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.facilities h3 {
+    margin-bottom: 10px;
+}
+
+.facilities table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.facilities td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.facilities svg,
+.facilities span {
+    margin-bottom: 1px;
+    vertical-align: middle;
+}
+
+.detail-button {
+    text-align: right;
+}
+
+.detail-button form {
+    margin: 0;
+}
+
+.input-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
 
 .facilities,
 .search-by-need {

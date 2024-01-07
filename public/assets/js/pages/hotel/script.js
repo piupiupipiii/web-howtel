@@ -13,8 +13,8 @@ $(document).ready(function () {
     }
 
     var dateTomorrow = year + "-" + month + "-" + date;
-    var checkinElem = $("#checkin-date");
-    var checkoutElem = $("#checkout-date");
+    var checkinElem = $(".date-input[placeholder='Check-in Date']");
+    var checkoutElem = $(".date-input[placeholder='Check-out Date']");
 
     checkinElem.attr("min", dateTomorrow);
 
@@ -31,7 +31,7 @@ $(document).ready(function () {
     ];
 
     // Populate room information table
-    const roomInfoTable = $("#roomInfoTable");
+    const roomInfoTable = $(".room-info-table");
     roomData.forEach(room => {
         const needsAttr = room.needs.map(need => `data-need="${need}"`).join(' ');
         roomInfoTable.append(`
@@ -41,18 +41,19 @@ $(document).ready(function () {
                 </td>
                 <td>
                     <h5>${room.name}</h5>
-                    <p>${room.description}</p>
+                    <p class="room-description">${room.description}</p>
                 </td>
                 <td>
-                    <input type="button" value="Pesan Kamar">
+                    <button class="book-room-btn" data-room="${room.name}">Pesan Kamar</button>
                 </td>
             </tr>
         `);
     });
 
     // Handle room booking button click
-    roomInfoTable.find('input[type="button"]').on('click', function () {
-        alert('Room booked!'); // Replace this with your actual booking logic
+    roomInfoTable.find('.book-room-btn').on('click', function () {
+        const roomName = $(this).data('room');
+        alert(`Room "${roomName}" booked!`); // Replace this with your actual booking logic
     });
 
     // Fungsi untuk menyaring kamar berdasarkan kriteria "Search by Need"
@@ -68,7 +69,7 @@ $(document).ready(function () {
         // Tampilkan hanya kamar yang memenuhi kriteria
         if (selectedNeeds.length > 0) {
             selectedNeeds.forEach(function (need) {
-                roomInfoTable.find(`tr[data-need*="${need}"]`).show();
+                roomInfoTable.find(`tr[data-needs*="${need}"]`).show();
             });
         } else {
             // Jika tidak ada kriteria yang dipilih, tampilkan semua kamar
@@ -77,9 +78,7 @@ $(document).ready(function () {
     }
 
     // Event handler untuk setiap perubahan pada checkbox
-    $('input[data-need]').change(function () {
-        filterRooms();
-    });
+    $('.search-by-need-btn').on('click', filterRooms);
 
     // Inisialisasi pemfilteran kamar
     filterRooms();
