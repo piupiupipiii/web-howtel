@@ -8,7 +8,7 @@
     @stack('style')
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}" async></script>
-    <script src="{{ asset('vendor/tailwindcss/index.js') }}" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>Hotel Booking</title>
 </head>
