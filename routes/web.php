@@ -7,7 +7,6 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\User\ProfileController;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,36 +20,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/search-hotels', [HotelController::class, 'searchHotels'])->name('search.hotels');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/hotel/{id}', [HotelController::class, 'index'])->name('hotel');
 
-Route::group(['middleware' => 'guest'], function (Router $route) {
-    $route->group(['prefix' => '/login', 'as' => 'login.'], function (Router $route) {
-        $route->get('/', [LoginController::class, 'index'])->name('index');
-        $route->post('/', [LoginController::class, 'authenticate'])->name('authenticate');
+Route::group(['middleware' => 'guest'], function () {
+    Route::group(['prefix' => '/login', 'name' => 'login.'], function () {
+        Route::get('/', [LoginController::class, 'index'])->name('index');
+        Route::post('/', [LoginController::class, 'authenticate'])->name('authenticate');
     });
 
-    $route->group(['prefix' => '/register', 'as' => 'register.'], function (Router $route) {
-        $route->get('/', [RegisterController::class, 'create'])->name('create');
-        $route->post('/', [RegisterController::class, 'store'])->name('store');
+    Route::group(['prefix' => '/register', 'name' => 'register.'], function () {
+        Route::get('/', [RegisterController::class, 'create'])->name('create');
+        Route::post('/', [RegisterController::class, 'store'])->name('store');
     });
 });
 
-Route::group(['middleware' => 'auth'], function (Router $route) {
-    $route->group(['prefix' => '/logout', 'as' => 'logout.'], function (Router $route) {
-        $route->get('/', [LogoutController::class, 'destroy'])->name('destroy');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => '/logout', 'name' => 'logout.'], function () {
+        Route::get('/', [LogoutController::class, 'destroy'])->name('destroy');
     });
 
-    $route->group(['prefix' => '/profile', 'as' => 'profile.'], function (Router $route) {
-        $route->get('/', [ProfileController::class, 'index'])->name('index');
+    Route::group(['prefix' => '/profile', 'name' => 'profile.'], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
     });
 
-    $route->group(['prefix' => '/booking', 'as' => 'booking.'], function (Router $route) {
-        $route->post('/', [BookingController::class, 'store'])->name('store');
-        $route->get('/create', [BookingController::class, 'create'])->name('create');
-        $route->get('/detail/{id}', [BookingController::class, 'detail'])->name('detail');
-        $route->patch('/cancel', [BookingController::class, 'cancel'])->name('cancel');
+    Route::group(['prefix' => '/booking', 'name' => 'booking.'], function () {
+        Route::post('/', [BookingController::class, 'store'])->name('store');
+        Route::get('/{id}', [BookingController::class, 'detail'])->name('detail');
+        Route::get('/create', [BookingController::class, 'create'])->name('create');
+        Route::patch('/cancel', [BookingController::class, 'cancel'])->name('cancel');
     });
 });
