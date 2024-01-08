@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class FrontendController extends Controller
+class FrontEndController extends Controller
 {
     public function index()
     {

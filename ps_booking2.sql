@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `hotel_facilities` (
   CONSTRAINT `hotel_facilities_hotel_id_foreign` FOREIGN KEY (`hotel_id`) REFERENCES `hotels` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ps_booking2.hotel_facilities: ~6 rows (approximately)
+-- Dumping data for table ps_booking2.hotel_facilities: ~8 rows (approximately)
 INSERT INTO `hotel_facilities` (`id`, `hotel_id`, `name`, `icon`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Wi-Fi', 'bi bi-wifi', '2024-01-04 16:48:08', NULL),
 	(2, 1, 'Parkir', 'bi bi-p-circle-fill', '2024-01-04 16:48:08', NULL),
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ps_booking2.orders: ~1 rows (approximately)
+-- Dumping data for table ps_booking2.orders: ~5 rows (approximately)
 INSERT INTO `orders` (`id`, `user_id`, `room_id`, `for_themself`, `name`, `email`, `phone`, `total_adults`, `total_children`, `check_in`, `check_out`, `message`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 1, 1, 1, NULL, NULL, NULL, 2, 0, '2024-01-07', '2024-01-08', '', '2024-01-07 05:51:56', '2024-01-07 05:51:56', NULL),
 	(2, 1, 1, 1, NULL, NULL, NULL, 2, 0, '2024-01-07', '2024-01-08', '', '2024-01-07 09:52:06', '2024-01-07 09:52:06', NULL),
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   CONSTRAINT `payments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ps_booking2.payments: ~1 rows (approximately)
+-- Dumping data for table ps_booking2.payments: ~5 rows (approximately)
 INSERT INTO `payments` (`id`, `order_id`, `price`, `token`, `created_at`, `updated_at`) VALUES
 	(1, 1, 650000, 'MjAyNDAxMDctMS0xLTEyNTE1Ni0xOnNpbHZ5bnVyYXpraWE2OTBAZ21haWwuY29tLUhKV05aTUhUWTdaV003RVc=', '2024-01-07 05:51:56', '2024-01-07 05:51:56'),
 	(2, 2, 650000, 'MjAyNDAxMDctMS0xLTE2NTIwNi0xOnNpbHZ5bnVyYXpraWE2OTBAZ21haWwuY29tLTBYWVpGQUhSOFNXUzVDNk4=', '2024-01-07 09:52:06', '2024-01-07 09:52:06'),
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_phone_unique` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table ps_booking2.users: ~1 rows (approximately)
+-- Dumping data for table ps_booking2.users: ~2 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 	(1, 'Silvy', 'silvynurazkia690@gmail.com', '085526293485', '$2y$12$uH3Z21UwYfQ1JfHL7A3ckuDlDEmDR.ZHKjvSnZdd4xvO80K/E67Tq', '2024-01-07 05:45:40', '2024-01-07 05:45:40'),
 	(3, 'gina', 'gina@gmail.com', '097654323434', '$2y$12$0q5zqis5GFsgJk8yw5zMdu0rsGb7p/oK182O6TBC.EpF5MpAYiaJ6', '2024-01-07 17:43:32', '2024-01-07 17:43:32');
