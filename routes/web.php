@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\User\ProfileController;
@@ -12,7 +12,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
 // Main Pages (Frontend)
-Route::get('/', [FrontendController::class, 'index'])->name('main');
+Route::get('/', [FrontEndController::class, 'index'])->name('main');
 
 Route::get('/hotel/{id}', [HotelController::class, 'index'])->name('hotel');
 
